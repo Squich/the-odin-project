@@ -1,0 +1,350 @@
+* {
+  margin: 0;
+  padding: 0;
+  --gray-gameboard: rgb(105, 42, 42);
+  --lightgray-gameboard: rgb(150, 67, 67);
+  --orange-fofo: rgb(211, 71, 16);
+  --blue-roboto: rgb(21, 201, 162);
+  --yellow-gold: rgb(240, 185, 47);
+  --green-winner: rgb(18, 150, 6);
+}
+/* prevent the default focus outline on chrome */
+:focus {
+  outline: transparent none 0px;
+}
+
+body {
+  background-image: linear-gradient(to bottom, #ffffff3b, #ffffff3b),
+    url(https://i.pinimg.com/originals/c2/bc/a7/c2bca7dd6445461b871e1c164217b5ae.png);
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  font-family: 'Dosis', sans-serif;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+h1 {
+  text-align: center;
+  margin: 10px 0;
+  color: var(--yellow-gold);
+  font-weight: bold;
+  text-shadow: 3px 3px 4px black;
+  -webkit-text-stroke: 1px black;
+}
+#desc {
+  text-align: center;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--yellow-gold);
+}
+#game-container {
+  margin: 0px auto;
+  width: fit-content;
+  width: -moz-fit-content;
+  height: min-content;
+  padding: 20px 20px 40px 20px;
+  border-radius: 30px 30px 100px 100px/ 30px 30px 50px 50px;
+  background-color: var(--gray-gameboard);
+  border: outset var(--lightgray-gameboard) 6px;
+}
+
+/* game board */
+#game-board {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  margin: auto;
+  padding: 20px 20px 0 20px;
+  font-weight: bold;
+}
+.players-profiles {
+  border: var(--lightgray-gameboard) 5px inset;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+#player-profile {
+  background-color: var(--orange-fofo);
+}
+#roboto-profile {
+  background-color: var(--blue-roboto);
+}
+.players-profiles .img-container {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 15px;
+  border: black solid 6px;
+}
+@keyframes winner-highlight {
+  from {
+    border: var(--green-winner) solid 6px;
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+  }
+  to {
+    border: black(58, 58, 58) solid 6px;
+    box-shadow: 0 0 10px transparent;
+  }
+}
+.players-profiles .winner-img {
+  animation-name: winner-highlight;
+  animation-duration: 1s;
+}
+.players-profiles img {
+  width: inherit;
+  height: inherit;
+  object-fit: cover;
+  object-position: 0 10px;
+  transform: scale(1.4, 1.4);
+}
+.players-profiles p {
+  margin: 10px 0;
+}
+#player-profile {
+  grid-column: 1;
+}
+#roboto-profile {
+  grid-column: 3;
+}
+.point {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: black;
+  color: var(--yellow-gold);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.point.winner-point {
+  background-color: var(--green-winner);
+}
+#game-hands {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: var(--lightgray-gameboard) 5px inset;
+  margin: 0 10px;
+  background-image: linear-gradient(
+    120deg,
+    var(--orange-fofo) 40%,
+    var(--blue-roboto) 60%
+  );
+}
+.hand-box {
+  width: 100px;
+  height: 100px;
+}
+@keyframes apparition {
+  from {
+    transform: scale(0, 0);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+.icons {
+  width: inherit;
+  height: inherit;
+  transform-origin: center;
+  animation-duration: 0.5s;
+  animation-name: apparition;
+  /* animation-timing-function don't work with transition, use transition-timing-function instead */
+  animation-timing-function: cubic-bezier(0.34, 0.88, 0.8, 1.44);
+  /* shadow for <SVG> & transparent PNG */
+  -webkit-filter: drop-shadow(3px 3px 4px black);
+  filter: drop-shadow(3px 3px 4px black);
+}
+
+/* display result */
+#winner-declaration {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  height: max-content;
+  width: max-content;
+  background-color: var(--yellow-gold);
+  box-shadow: 3px 3px 4px black;
+  border-radius: 10px;
+  color: rgb(78, 17, 9);
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  padding: 10px;
+  white-space: pre-wrap;
+}
+#new-game-btn {
+  margin: 10px auto 0 auto;
+  display: block;
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: whitesmoke;
+  background-color: var(--green-winner);
+  border: orange solid 1px;
+  opacity: 0;
+  visibility: collapse;
+  cursor: pointer;
+  font-weight: bold;
+  /* position absolute to initial to prevent popup layout */
+  position: absolute;
+}
+#new-game-btn.visible {
+  opacity: 1;
+  visibility: visible;
+  position: initial;
+}
+
+/* Options buttons */
+#buttons {
+  display: flex;
+  justify-content: space-around;
+  width: 280px;
+  margin: auto;
+}
+.button-icons {
+  object-fit: fill;
+  width: 60px;
+  height: 60px;
+  transform: scale(1, 1);
+  transition: 0.2s;
+  transition-timing-function: ease-out;
+}
+.button .button-icons:hover {
+  transform: scale(1.5, 1.5);
+  cursor: pointer;
+}
+/* for mobile, remove the animation trigger from hover */
+/* add the animation trigger to click (button:active) */
+@media (hover: none) {
+  .button .button-icons:hover {
+    transform: scale(1, 1);
+  }
+  .button:active .button-icons {
+    transform: scale(1.5, 1.5);
+  }
+}
+.disabled-button .button-icon:hover {
+  transform: scale(1, 1);
+}
+.button,
+.disabled-button {
+  background: transparent;
+  border: none;
+  margin: 5px;
+}
+
+/* rounds result */
+#round-result {
+  margin-top: 10px;
+}
+#round-result-text {
+  opacity: 0;
+  transition: opacity 0s;
+  font-size: 13px;
+  height: 20px;
+  font-weight: bold;
+  color: var(--yellow-gold);
+  text-align: center;
+}
+#round-result-text.visible {
+  transition: opacity 0.2s;
+  opacity: 1;
+}
+#rounds-tables-container {
+  display: flex;
+  border: var(--lightgray-gameboard) 5px inset;
+  margin: 10px auto 0 auto;
+  width: fit-content;
+  width: -moz-fit-content;
+}
+.rounds-tables {
+  border-spacing: 0;
+  width: max-content;
+}
+.rounds-tables td,
+.rounds-tables th {
+  border: black 1px solid;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+}
+.rounds-tables td .icons {
+  height: 24px;
+  width: 28px;
+}
+.rounds-tables th {
+  background-color: var(--yellow-gold);
+}
+.player-plays {
+  background-color: var(--orange-fofo);
+}
+.roboto-plays {
+  background-color: var(--blue-roboto);
+}
+.rounds-tables td.win-cell {
+  background-color: var(--green-winner);
+}
+
+/* footer */
+#footer {
+  background: black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+#footer p {
+  text-align: center;
+  color: whitesmoke;
+  margin: 1rem auto;
+}
+#footer a {
+  color: var(--blue-roboto);
+  text-decoration: none;
+}
+#footer a:visited {
+  color: var(--orange-fofo);
+}
+#footer a:hover {
+  color: var(--yellow-gold);
+}
+
+/* responsive */
+@media (max-width: 675px) {
+  #game-container {
+    width: 90vw;
+    padding: 20px 10px 20px 10px;
+  }
+  #game-board {
+    padding: 10px 0 0 0;
+  }
+  #rounds-tables-container {
+    flex-direction: column;
+  }
+  #rounds-table2 {
+    margin-top: 5px;
+  }
+}
+@media (max-width: 550px) {
+  .players-profiles .img-container {
+    width: 50px;
+    height: 50px;
+  }
+  .players-profiles img {
+    width: inherit;
+    height: inherit;
+    object-fit: cover;
+    object-position: 0 5px;
+    transform: scale(1.4, 1.4);
+  }
+}
+@media (max-width: 450px) {
+  .hand-box {
+    width: 50px;
+    height: 50px;
+  }
+}

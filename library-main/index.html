@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Almendra+Display&family=Almendra+SC&family=Almendra:ital,wght@0,400;0,700;1,400;1,700&family=Amarante&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+      integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN"
+      crossorigin="anonymous"
+    />
+    <!-- other way to link font-awesome, but seem not work here -->
+    <!-- <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="style.css" />
+    <title>Library</title>
+  </head>
+  <body>
+    <header id="header">
+      <h1 id="library-title">My library</h1>
+      <div id="sort-div">
+        <p id="sort-text"></p>
+        <select id="sort-select">
+          <option value="" selected>Sort the library</option>
+          <option value="title-down">Title Down</option>
+          <option value="title-up">Title Up</option>
+          <option value="author-down">Author Down</option>
+          <option value="author-up">Author Up</option>
+          <option value="nb-pages-down">Nb Pages Down</option>
+          <option value="nb-pages-up">Nb Pages Up</option>
+          <option value="likes">Likes first</option>
+          <option value="dislikes">Dislikes first</option>
+          <option value="read">Read first</option>
+          <option value="unread">Unread first</option>
+        </select>
+      </div>
+    </header>
+
+    <main id="library-list">
+      <ul id="books-list"></ul>
+    </main>
+
+    <footer id="footer">
+      <p>
+        <a href="https://github.com/aurelien-genois/library" target="_blank"
+          >Fifth Odin project</a
+        >
+        created by
+        <a href="https://github.com/aurelien-genois" target="_blank"
+          >Aurélien Genois</a
+        >
+      </p>
+    </footer>
+    <script src="logic.js"></script>
+  </body>
+</html>
